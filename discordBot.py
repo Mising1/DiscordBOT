@@ -22,6 +22,6 @@ async def bilans(ctx):
     bilans = main()
     await chanel.edit(name=f"Winki: {bilans[0]} Luski: {bilans[1]}")
     await ctx.message.delete()
-    await ctx.send(f"Mising wyccarował {bilans[0]}! 1lucky strolował {bilans[1]} razy!")
+    await ctx.send(f"Mising wycarował {bilans[0]} razy!\n a 1lucky strolował {bilans[1]} razy!")
 
 bot.run(os.getenv("DISCORD_TOKEN"))
