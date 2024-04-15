@@ -1,6 +1,7 @@
 import requests
 from dotenv import load_dotenv
 import os
+import json
 
 load_dotenv()
 
@@ -12,7 +13,7 @@ class RiotAPI:
         self.toTxt = []
 
     def get_match_ids(self):
-        api_url = f"https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{self.puuid}/ids?startTime=1709251200&type=ranked&start=0&count=8&api_key={self.api_key}"
+        api_url = f"https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{self.puuid}/ids?startTime=1709251200&type=ranked&start=0&count=&api_key={self.api_key}"
         self.gry = requests.get(api_url).json()
         return self.gry
 
@@ -33,19 +34,20 @@ class RiotAPI:
                     i += 1
 
     def print_results(self):
-        f = open("gry.txt", "a")
-        tab = self.read_results()
+        data = self.read_results()
         for i in self.toTxt:
-            if i not in tab:
-                f.write(i + "\n")
-        f.close()
+            if i not in data:
+                data.append(i)
+        with open("gry.json", "w") as f:
+            json.dump(data, f)
 
     def read_results(self):
-        f = open("gry.txt", "r")
-        tab = f.readlines()
-        tab = [x.strip() for x in tab]
-        f.close()
-        return tab
+        try:
+            with open("gry.json", "r") as f:
+                data = json.load(f)
+        except FileNotFoundError:
+            data = []
+        return data
 
 
 def main():

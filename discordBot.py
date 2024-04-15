@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 import os
 from riot_api import main
 
-
 load_dotenv()
 
 intents = discord.Intents.default()
