@@ -26,12 +26,9 @@ class RiotAPI:
         i = 0
         for one in self.matches:
             if one["puuid"] == self.puuid:
-                if one["win"] == True:
-                    self.toTxt.append(self.gry[i]+": win")
-                    i += 1
-                else:
-                    self.toTxt.append(self.gry[i]+": lose")
-                    i += 1
+                result = "win" if bool(one["win"]) else "lose"
+                self.toTxt.append(f"{self.gry[i]}: {result}")
+                i += 1 
 
     def print_results(self):
         data = self.read_results()

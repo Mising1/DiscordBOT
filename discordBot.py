@@ -17,10 +17,11 @@ async def on_ready():
 
 
 @bot.command()
-async def xd(ctx):
+async def bilans(ctx):
     chanel = bot.get_channel(int(os.getenv("ID_CHANNEL")))
+    await ctx.message.delete()
     bilans = main()
     await chanel.edit(name=f"Winki: {bilans[0]} Luski: {bilans[1]}")
-
+    await ctx.send(f"1lucky strolował {bilans[1]} razy.")
 
 bot.run(os.getenv("DISCORD_TOKEN"))
