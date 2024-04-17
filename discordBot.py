@@ -19,9 +19,13 @@ async def on_ready():
 @bot.command()
 async def bilans(ctx):
     chanel = bot.get_channel(int(os.getenv("ID_CHANNEL")))
-    bilans = main()
-    await chanel.edit(name=f"Winki: {bilans[0]} Luski: {bilans[1]}")
+    
+    try:
+        bilans = main()
+        await chanel.edit(name=f"Win: {bilans[0]} Luski: {bilans[1]}")
+        await ctx.send(f"Mising wycarował {bilans[0]} razy!\n a 1lucky strolował {bilans[1]} razy!")
+    except Exception as e:
+        print("Error: ", e)
     await ctx.message.delete()
-    await ctx.send(f"Mising wycarował {bilans[0]} razy!\n a 1lucky strolował {bilans[1]} razy!")
 
 bot.run(os.getenv("DISCORD_TOKEN"))

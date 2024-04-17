@@ -11,9 +11,10 @@ class RiotAPI:
         self.puuid = puuid
         self.matches = []
         self.toTxt = []
+        self.liczba_gier = 8
 
     def get_match_ids(self):
-        api_url = f"https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{self.puuid}/ids?startTime=1709251200&type=ranked&start=0&count=&api_key={self.api_key}"
+        api_url = f"https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{self.puuid}/ids?startTime=1709251200&type=ranked&start=0&count={self.liczba_gier}&api_key={self.api_key}"
         self.gry = requests.get(api_url).json()
         return self.gry
 
